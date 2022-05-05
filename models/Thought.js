@@ -1,5 +1,10 @@
 const { Schema, model, Types } = require("mongoose");
-const reactionSchema = require('./Reaction');
+
+//reaction field's subdocument schema in the Thought model
+const reactionSchema = new Schema({
+    
+})
+
 
 const thoughtSchema = new Schema({
     
