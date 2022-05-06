@@ -29,10 +29,11 @@ const userController = {
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => res.status(400).json(err));
   },
-  // Update user
+
+  // Update user by id
   updateUser(req, res) {
    User.findOneAndUpdate(
-    { _id: req.body.userId },
+    { _id: req.body.id },
     { new: true }
   )
   .then(dbUserData => {
@@ -43,43 +44,46 @@ const userController = {
     res.json(dbUserData);
 })
   .catch((err) => {
-    console.log(err);
-    return res.status(400).json(err);
+    return res.status(400).json(err)
   });
   },
-
-  // Add an assignment to a student
-  addAssignment(req, res) {
-    console.log('You are adding an assignment');
-    console.log(req.body);
-    Student.findOneAndUpdate(
-      { _id: req.params.studentId },
-      { $addToSet: { assignments: req.body } },
-      { runValidators: true, new: true }
-    )
-      .then((student) =>
-        !student
-          ? res
-              .status(404)
-              .json({ message: 'No student found with that ID :(' })
-          : res.json(student)
-      )
-      .catch((err) => res.status(500).json(err));
+    // Delete a user
+    deleteUser(req, res) {
+      User.findOneAndDelete({ _id: req.params.id })
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          res.status(404).json({ message: "no user found with this ID" });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch((err) => res.status(400).json(err));
   },
-  // Remove assignment from a student
-  removeAssignment(req, res) {
-    Student.findOneAndUpdate(
-      { _id: req.params.studentId },
-      { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
-      { runValidators: true, new: true }
+  // Add a friend
+  addFriend(req, res) {
+    console.log('You are adding a friend');
+   User.findOneAndUpdate(
+      { _id: req.params.id },
+      { $addToSet: { friends: params.friendsId } },
+      { new: true }
     )
-      .then((student) =>
-        !student
-          ? res
-              .status(404)
-              .json({ message: 'No student found with that ID :(' })
-          : res.json(student)
-      )
-      .catch((err) => res.status(500).json(err));
+    .then((dbUserData) => res.json(dbUserData))
+    .catch((err) => res.status(400).json(err));
+},
+  // Remove assignment from a student
+  removeFriend(req, res) {
+   User.findOneAndUpdate(
+    { _id: req.params.id },
+    { $addToSet: { friends: params.friendsId } },
+    { new: true }
+  )
+      .then((dbUserData) => {
+        if (!dbUserData) {
+         res.status(404).json({ message: 'No user found with that ID' });
+         return;
+        }
+        res.json(dbUserData);
+      })
+      .catch((err) => res.status(400).json(err));
   },
 };
