@@ -1,6 +1,6 @@
 const { User, Thought} = require('../models');
 
-module.exports = {
+const userController = {
   // Get all users
   getAllUsers(req, res) {
    User.find()
@@ -23,35 +23,29 @@ module.exports = {
         return res.status(400).json(err);
       });
   },
-  // create a new student
-  createStudent(req, res) {
-    Student.create(req.body)
-      .then((student) => res.json(student))
-      .catch((err) => res.status(500).json(err));
+  // Create a new user
+  createUser(req, res) {
+    User.create(req.body)
+      .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => res.status(400).json(err));
   },
-  // Delete a student and remove them from the course
-  deleteStudent(req, res) {
-    Student.findOneAndRemove({ _id: req.params.studentId })
-      .then((student) =>
-        !student
-          ? res.status(404).json({ message: 'No such student exists' })
-          : Course.findOneAndUpdate(
-              { students: req.params.studentId },
-              { $pull: { students: req.params.studentId } },
-              { new: true }
-            )
-      )
-      .then((course) =>
-        !course
-          ? res.status(404).json({
-              message: 'Student deleted, but no courses found',
-            })
-          : res.json({ message: 'Student successfully deleted' })
-      )
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+  // Update user
+  updateUser(req, res) {
+   User.findOneAndUpdate(
+    { _id: req.body.userId },
+    { new: true }
+  )
+  .then(dbUserData => {
+    if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id!' });
+        return;
+    }
+    res.json(dbUserData);
+})
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json(err);
+  });
   },
 
   // Add an assignment to a student
