@@ -11,6 +11,8 @@ API for social network application where the user can interact and share their t
 - Install Nodemon
 
 ## Usage
+1. Run `npm install` and create `.env` file to hook up to your MongoDB.  
+2. Run `npm start` to start the application.
 
 ## Visual
 ![]()
