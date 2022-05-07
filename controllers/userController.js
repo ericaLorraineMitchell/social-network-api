@@ -1,4 +1,5 @@
 const { User, Thought } = require("../models");
+const { ObjectId } = require("mongoose").Types;
 
 const userController = {
   // Get all users
@@ -59,8 +60,8 @@ const userController = {
   addFriend(req, res) {
     console.log("You are adding a friend");
     User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $addToSet: { friends: params.friendsId } },
+      { _id: ObjectId(req.params.userId) },
+      { $addToSet: { friends: req.params.friendsId } },
       { new: true }
     )
       .then((dbUserData) => res.json(dbUserData))

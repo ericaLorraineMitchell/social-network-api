@@ -1,20 +1,28 @@
 {
-  "name": "28-Stu_Mini-Project",
-  "version": "1.0.1",
-  "description": "Mongoose back-end project - Main",
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "API for social network application where the user can interact and share their thoughts. Built with express.js for routing, a MongoDB database, and the Mongoose ODM.",
   "main": "index.js",
-  "license": "MIT",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon index",
-    "seed": "node utils/seed",
-    "heroku-postbuild": "node utils/seed.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericaLorraineMitchell/social-network-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericaLorraineMitchell/social-network-api/issues"
+  },
+  "homepage": "https://github.com/ericaLorraineMitchell/social-network-api#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^6.0.13"
+    "express": "^4.18.1",
+    "mongoose": "^6.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.16"
   }
 }
