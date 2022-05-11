@@ -15,8 +15,8 @@ API for social network application where the user can interact and share their t
 2. Run `npm start` on index.js file to start the application.
 
 ## Visual
-![]()
+![Mock Up](./utils/images/insomnia-screenshot.png)
 
 ## Contact / Questions
  - [Email](erlmitchell@gmail.com)
- - [GitHub] ()
+ - [GitHub](https://github.com/ericaLorraineMitchell/social-network-api)
